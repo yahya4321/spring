@@ -23,6 +23,7 @@ public class Foyer implements Serializable {
     private long capaciteFoyer;
     @OneToOne
     private Universite universite;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy="foyer")
     private Set<Bloc> Blocs;
 
