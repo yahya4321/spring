@@ -1,13 +1,14 @@
 package tn.esprit.tpfoyer.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.cglib.core.Block;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -17,13 +18,16 @@ import java.util.Set;
 @AllArgsConstructor
 public class Chambre implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idChambre;
-    private long numeroChambre;
-    @Enumerated(EnumType.STRING)
+    private long numeroCharhambre;
+    @Enumerated
     private TypeChambre typeC;
+    @OneToMany
+    @JsonIgnore
+    private List<Reservation> reservations;
     @ManyToOne (cascade = CascadeType.ALL)
-    Bloc blocks;
+    @JsonIgnore
+    private  Bloc bloc;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy="chambre")
-    private Set<Reservation> Reservations;
 }

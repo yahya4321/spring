@@ -1,34 +1,30 @@
 package tn.esprit.tpfoyer.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-
-public class Foyer implements Serializable {
-
+@AllArgsConstructor
+public class Foyer {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long idFoyer;
     private String nomFoyer;
     private long capaciteFoyer;
-    @OneToOne
-    private Universite universite;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy="foyer")
-    private Set<Bloc> Blocs;
-
-
+    @OneToMany(cascade = CascadeType.ALL , mappedBy ="foyer")
+    @JsonIgnore
+    private List<Bloc>  idBloc;
+    @OneToOne(cascade = CascadeType.ALL , mappedBy ="foyer")
+    @JsonIgnore
+    private  Universite univ;
 
 }
-
-

@@ -1,29 +1,28 @@
 package tn.esprit.tpfoyer.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-public class Reservation implements Serializable {
+@AllArgsConstructor
+public class Reservation {
     @Id
-    private String idReservation;
-    @Temporal(TemporalType.DATE)
-    private Date anneeUniversitaire;
-    private boolean estValide;
-    @ManyToOne (cascade = CascadeType.ALL)
-    Chambre chambre;
-    @ManyToMany(cascade = CascadeType.ALL)
-    private Set<Etudiant> Etudiants;
 
+    private String idReservation;
+    private Date anneUniversitaire;
+    private boolean estValide;
+
+    @ManyToMany(mappedBy="reservationList", cascade = CascadeType.ALL)
+
+    private List<Etudiant> etudiantList;
 }

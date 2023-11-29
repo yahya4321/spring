@@ -1,24 +1,24 @@
 package tn.esprit.tpfoyer.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.io.Serializable;
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-public class Universite implements Serializable {
+@AllArgsConstructor
+public class Universite {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long idUniversite;
     private String nomUniversite;
     private String adresse;
-    @OneToOne(mappedBy="universite")
+    @OneToOne
+
     private Foyer foyer;
 }
